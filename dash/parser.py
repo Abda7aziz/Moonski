@@ -25,6 +25,22 @@ def transacted_value(x):
     else:
         return x['Quantity']*x['Price']
 
+def realized(x,percent=False):
+    if x['Type'] == 'Sell':
+        cost = x['Quantity']*x['Avg_Price']
+        rel =  x['Cost_In_Market_Currency'] - cost
+        if percent == True:
+            return '%'+str(round(rel/cost*100,2))
+        else:
+            return rel
+    elif x['Type'] == 'Div':
+        if percent == True:
+            return'%100'
+        else:
+            return x['Quantity']*x['Price']
+    else:
+        return 0
+
 def feature_eng(df):
     df = df.dropna()
     df['Date'] = pd.to_datetime(df['Date'])
@@ -33,10 +49,13 @@ def feature_eng(df):
     df.sort_values(['Stock','Date','Type'], ascending=[True, True, True], inplace=True)
     df['Adj_Quantity'] = df.apply(lambda x: ((x.Type == "Buy") - (x.Type == "Sell")) * x['Quantity'], axis = 1)
     df['Adj_Quantity'] = df.groupby('Stock')['Adj_Quantity'].cumsum()
-    df['Adj_Price'] = df.apply(lambda x: ((x.Type == "Buy") - (x.Type == "Sell")) * x['Cost_In_Market_Currency'], axis = 1)
-    df['Adj_Price'] = df.groupby('Stock')['Adj_Price'].cumsum().div(df['Adj_Quantity'])
-    df.loc[df['Type'] == 'Sell',['Adj_Price']] = np.NaN
+    df['Avg_Price'] = df.apply(lambda x: ((x.Type == "Buy") - (x.Type == "Sell")) * x['Cost_In_Market_Currency'], axis = 1)
+    df['Avg_Price'] = df.groupby('Stock')['Avg_Price'].cumsum().div(df['Adj_Quantity'])
+    df.loc[df['Type'] == 'Sell',['Avg_Price']] = np.NaN
     df.fillna(method='ffill', inplace=True)
+    df['Realized_Gains/Losses'] = df.apply(realized,axis=1)
+    df['%Realized_Gains/Losses'] = df.apply(lambda x:realized(x,percent=True),axis=1)
+    df['Total_Realized'] = df.groupby('Stock')['Realized_Gains/Losses'].cumsum()
     df = df.round(2)
     return df
 

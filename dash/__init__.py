@@ -4,6 +4,9 @@ from layout import output
 
 app = dash.Dash()
 app.layout = output
+app.css.append_css({
+    'external_url': 'https://codepen.io/chriddyp/pen/bWLwgP.css'
+})
 register_callback(app)
 
 if __name__ == '__main__':

@@ -13,8 +13,12 @@ def row1():
         * __Market__ : '_Saudi_ , _US_ or _Crypto_ , etc.
         * __Quantity__ : Quantity of shares n the transactions
         * __Price__ : The price of the stock in the transaction
-        """)
-    ])
+        """,className='nine columns'),
+        dcc.RadioItems(id='currency',options=[
+            {'label':'SAR','value':'SAR'},
+            {'label':'USD','value':'USD'}
+        ],value='SAR',className='three columns')
+    ],className='row')
 
 def row2():
     row =  html.Div([dcc.Upload(id='file',
@@ -30,6 +34,7 @@ def tab1():
 
 def tab2():
     return dcc.Tab(label='Summary',children=[
+
         html.Div(id='tab2',className='row')
     ])
 
@@ -41,7 +46,8 @@ def tab3():
 def tab4():
     return dcc.Tab(label='Dashboard',children=[
         html.Div(children=[
-            dcc.Graph(id='pie',className='col-6')
+            html.Div(dcc.Graph(id='pie'),className='six columns'),
+            html.Div(dcc.Graph(id='totalgains'),className='six columns')
         ],className='row')
     ])
 

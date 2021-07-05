@@ -2,11 +2,9 @@ import dash
 from callbacks import register_callback
 from layout import output
 
-app = dash.Dash()
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets) 
 app.layout = output
-app.css.append_css({
-    'external_url': 'https://codepen.io/chriddyp/pen/bWLwgP.css'
-})
 register_callback(app)
 
 if __name__ == '__main__':

@@ -6,17 +6,22 @@ from parser import parse_contents
 import pandas as pd
 import plotly.express as px
 from plotly import graph_objects as go
+from extras import guide
+import dash_core_components as dcc
 
 def register_callback(app):
 
-    @app.callback(Output('dragged','data'),
-                  Input('file','contents'),
-                  State('file','filename'),
-                  State('file','last_modified'))
+    @app.callback([Output('dragged','data'),
+                   Output('guide','children')],
+                   Input('file','contents'),
+                   State('file','filename'),
+                   State('file','last_modified'))
     def store(content,filename,date):
         if content is not None:
             children = [parse_contents(c, n, d) for c, n, d in zip(content,filename,date)]
-            return children[0].to_dict('records')
+            return children[0].to_dict('records'),None
+        else:
+            return None,guide
 
 
     @app.callback(Output('tab1','children'),
@@ -55,7 +60,7 @@ def register_callback(app):
                     ))
 
     @app.callback([Output('pie','figure'),
-                   Output('totalgains','figure')],
+                   Output('totalgains','children')],
                   [Input('dragged','data'),
                   Input('currency','value')])
     def pie(dragged,currency):
@@ -73,12 +78,12 @@ def register_callback(app):
                 df['Total_Realized'] = df.apply(lambda x: x['Total_Realized']/3.75 if x['Market'] == 'Saudi' else x['Total_Realized'],axis=1)
             df = df.round(2)
             fig1 = px.pie(df[df.Adj_Quantity != 0],values='Total_Cost',names='Stock',title='Position Sizes')
-            fig2 =   go.Figure(go.Indicator(
+            fig2 =   dcc.Graph(figure=go.Figure(go.Indicator(
                 mode = "number+delta",
                 value = df.Total_Realized.sum()+df.Total_Cost.sum(),
                 number = {'prefix': "$"},
                 delta = {'position': "top", 'reference': df.Total_Cost.sum()}
-            ))  
+            )))
                 # domain = {'x': [0, 1], 'y': [0, 1]}))
             return (fig1,fig2)
         else:

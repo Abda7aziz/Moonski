@@ -1,0 +1,221 @@
+.w-layout-grid {
+  display: -ms-grid;
+  display: grid;
+  grid-auto-columns: 1fr;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: auto auto;
+  grid-template-rows: auto auto;
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
+}
+
+.body {
+  background-color: #222;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#000), to(#000));
+  background-image: linear-gradient(180deg, #000, #000);
+  font-family: Exo, sans-serif;
+  color: #444;
+  font-weight: 400;
+  background-clip: border-box;
+  -webkit-text-fill-color: inherit;
+}
+
+.hero {
+  position: static;
+  height: 300px;
+  background-image: linear-gradient(186deg, transparent, #000), radial-gradient(circle farthest-corner at 50% 50%, transparent, #000 87%), url('img/WallpaperFusion-moon-landscape-1680x480.jpg');
+  background-position: 0px 0px, 0px 0px, 50% 100%;
+  background-size: auto, auto, cover;
+  background-repeat: repeat, repeat, repeat-y;
+  background-attachment: scroll, scroll, scroll;
+}
+
+.grid1 {
+  margin-top: 19px;
+  margin-right: 2%;
+  margin-left: 2%;
+  -ms-grid-columns: 1fr 0.5fr;
+  grid-template-columns: 1fr 0.5fr;
+}
+
+.desc {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.text-span {
+  color: #447740;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.pheading {
+  color: #444;
+  font-weight: 900;
+}
+
+.heading {
+  font-size: 28px;
+}
+
+.grid2 {
+  display: -ms-grid;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: 1fr;
+  -ms-grid-rows: auto auto;
+  grid-template-rows: auto auto;
+}
+
+._2verdiv {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  grid-auto-columns: 1fr;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: auto auto;
+  grid-template-rows: auto auto;
+}
+
+._2verdiv.stretch {
+  margin-right: 2%;
+  margin-left: 2%;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.assets {
+  color: #447740;
+}
+
+._2hordiv {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+._3hordiv {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.div-block-2 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.div-block-3 {
+  display: block;
+}
+
+@media screen and (max-width: 991px) {
+  .grid1 {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .desc {
+    font-size: 13px;
+  }
+
+  .heading {
+    font-size: 26px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .hero {
+    background-size: auto, auto, cover;
+  }
+
+  .grid1 {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .desc {
+    font-size: 8px;
+  }
+
+  .heading {
+    font-size: 19px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .assets {
+    font-size: 32px;
+  }
+
+  ._3hordiv {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .grid1 {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+    -ms-grid-rows: auto auto auto;
+    grid-template-rows: auto auto auto;
+  }
+
+  .desc {
+    font-size: 8px;
+  }
+
+  ._3hordiv {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+#w-node-_8c7cab7a-95bc-6772-9458-b5c210b781f7-2a6ed86d {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
+}
